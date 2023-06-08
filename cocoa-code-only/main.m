@@ -392,13 +392,95 @@ int main(int argc, const char * argv[]) {
         [[window contentView] addSubview: popUpButton];
         
         //
+        // progress bar
+        //
+        
+        // https://github.com/AppTyrant/NSProgressIndicator-ProgressBinding
+        // https://github.com/NikolaGrujic91/Cocoa-macOS-Determinate-Progress-Bar/tree/master/Cocoa%20Progress%20Bar
+        
+        // without __block, the variable cannot be modified from within
+        // the block used in the timer below
+        double indicator_min = 0.0;
+        double indicator_max = 100.0;
+        double indicator_inc = 20.0;
+        __block double indicator_curr_val = 0.0;
+        __block bool increment = true;
+        
+        //NSProgress *progress = [[NSProgressIndicator alloc] init];
+        
+        int progress_indicator_1_x = 20;
+        int progress_indicator_1_y = 250;
+        
+        int progress_indicator_1_width = 450;
+        int progress_indicator_1_height = 25;
+        
+        NSProgressIndicator *progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(progress_indicator_1_x, progress_indicator_1_y, progress_indicator_1_width, progress_indicator_1_height)];
+        //[progressIndicator startAnimation:nil];
+        //[progressIndicator stopAnimation:nil];
+        
+        progressIndicator.minValue = indicator_min;
+        progressIndicator.maxValue = indicator_max;
+        //progressIndicator.doubleValue = progress.fractionCompleted;
+        
+        [progressIndicator setUsesThreadedAnimation: YES];
+        //[progressIndicator setIndeterminate: YES];
+        [progressIndicator setIndeterminate: NO];
+        //[progressIndicator startAnimation: progress];
+        //[progressIndicator startAnimation: nil];
+        [progressIndicator setHidden: NO];
+        
+        indicator_curr_val = 50.0;
+        [progressIndicator setDoubleValue: indicator_curr_val];
+        
+        indicator_curr_val += 30.0;
+        [progressIndicator incrementBy: 30.0];
+        
+        // add the button to the window
+        [[window contentView] addSubview: progressIndicator];
+        
+        // https://gist.github.com/davbeck/3661211
+        // https://stackoverflow.com/questions/14924892/nstimer-with-anonymous-function-block
+        NSTimer *progress_indicator_1_timer = [
+            NSTimer scheduledTimerWithTimeInterval: 1.0
+            target: [NSBlockOperation blockOperationWithBlock: ^{
+                
+                // this is an anonymous function aka. block this executed by the timer each tick
+                
+                NSLog(@"progress_indicator_1_timer()");
+                //[progressIndicator incrementBy: 5];
+                
+                indicator_curr_val = indicator_curr_val + ( increment ? indicator_inc : (-1.0)*indicator_inc );
+                
+                if (indicator_curr_val >= indicator_max)
+                {
+                    indicator_curr_val = indicator_max;
+                    increment = false;
+                }
+                
+                if (indicator_curr_val <= indicator_min)
+                {
+                    indicator_curr_val = indicator_min;
+                    increment = true;
+                }
+                
+                [progressIndicator setDoubleValue: indicator_curr_val];
+            
+            }]
+            selector: @selector(main)
+            userInfo: nil
+            repeats: YES];
+        
+        //
         // TODO
         //
         
-        // spinner for numbers
+        // spinner for numbers (NSStepper)
         // item list
         // tree
-        // table
+        // table (https://github.com/NikolaGrujic91/Cocoa-macOS-Examples)
+        // message boxes (https://github.com/NikolaGrujic91/Cocoa-macOS-Examples)
+        // (modal) dialogs
+        // status bar
         
         //
         // Application
@@ -410,5 +492,3 @@ int main(int argc, const char * argv[]) {
     }
     return 0;
 }
-
-
