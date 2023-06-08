@@ -20,6 +20,23 @@
     // For int  you use %i
     // For float you use %f
     // For double you use %lf
+    
+    if (sender.identifier == @"button_9") {
+        NSLog(@"[DefaultController] Button button_9 detected");
+        
+        NSPopUpButton *popUpButton = (NSButton *)sender;
+        if (popUpButton.pullsDown) {
+            
+            // Unlike popup lists, the title of a popup button displaying a
+            // pulldown list is not based on the currently selected item and
+            // thus remains fixed unless you change using the cell’s setTitle:method.
+            
+            // if the button is set to pulldown, then set the title manually
+            // otherwise it wont change!
+            id title = popUpButton.selectedItem.title;
+            [popUpButton.cell setTitle: title];
+        }
+    }
 }
 
 -(void)sliderValueChanged:(NSSlider *)sender {

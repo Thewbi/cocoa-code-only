@@ -360,10 +360,42 @@ int main(int argc, const char * argv[]) {
         [[window contentView] addSubview: button_8];
         
         //
+        // combo box / drop down
+        //
+        
+        // https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MenuList/Articles/ManagingPopUpItems.html
+        // https://developer.apple.com/forums/thread/44190
+        
+        int button_9_x = 20;
+        int button_9_y = 230;
+        
+        int button_9_width = 130;
+        int button_9_height = 25;
+        
+        NSPopUpButton *popUpButton = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(button_9_x, button_9_y, button_9_width, button_9_height)];
+        [popUpButton setTitle: @"button_9"];
+        [popUpButton setIdentifier: @"button_9"];
+        
+        // Unlike popup lists, the title of a popup button displaying a pulldown list is not based on the currently selected item and thus remains fixed unless you change using the cell’s setTitle:method.
+        popUpButton.pullsDown = true;
+        //popUpButton.pullsDown = false;
+        
+        NSArray *theTitleArray = [NSArray arrayWithObjects:@"Item 1", @"Item 2", @"Item 3", @"Item 4", nil];
+        [popUpButton removeAllItems];
+        [popUpButton addItemsWithTitles:theTitleArray];
+        
+        // event handling
+        [popUpButton setTarget:defaultController];
+        [popUpButton setAction:@selector(buttonPressed:)];
+        
+        // add the button to the window
+        [[window contentView] addSubview: popUpButton];
+        
+        //
         // TODO
         //
         
-        // combo box / drop down
+        // spinner for numbers
         // item list
         // tree
         // table
