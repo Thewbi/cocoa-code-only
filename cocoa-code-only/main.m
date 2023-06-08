@@ -8,9 +8,12 @@
 //#import <UIKit/UIKit.h>
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
+
 #import "DefaultController.h"
+#import "CustomOutlineViewController.h"
+#import "ViewController.h"
+
 #import "DefaultNSOutlineViewDataSource.h"
-//#import "ViewController.h"
 
 #import "AppDelegate.h"
 
@@ -35,9 +38,6 @@ int main(int argc, const char * argv[])
 int main(int argc, const char * argv[]) {
     
     NSLog(@"main() ...");
-    
-//todo: everything was moved from the controller into the delegate
-  //  separate those classes again
     
     @autoreleasepool {
         
@@ -91,7 +91,8 @@ int main(int argc, const char * argv[]) {
         // custom UI controll (callback handler for widget events)
         //
         
-        id controller = [DefaultController alloc];
+        id defaultController = [DefaultController alloc];
+        id customOutlineViewController = [CustomOutlineViewController alloc];
  
         //
         // Button
@@ -114,8 +115,7 @@ int main(int argc, const char * argv[]) {
         [button_1 setBezelStyle:NSBezelStyleRounded];
         
         // event handling
-        [button_1 setTarget:controller];
-        //[button_1 setTarget:appDelegate];
+        [button_1 setTarget:defaultController];
         [button_1 setAction:@selector(buttonPressed:)];
         
         // add the button to the window
@@ -136,8 +136,7 @@ int main(int argc, const char * argv[]) {
         [slider_1 setIdentifier: @"slider_1"];
         
         // event handling
-        [slider_1 setTarget:controller];
-        //[slider_1 setTarget:appDelegate];
+        [slider_1 setTarget:defaultController];
         [slider_1 setContinuous:YES];
         [slider_1 setAction:@selector(sliderValueChanged:)];
         
@@ -161,8 +160,7 @@ int main(int argc, const char * argv[]) {
         [textfield_1 setIdentifier: @"textfield_1"];
         
         // event handling
-        [textfield_1 setTarget:controller];
-        //[textfield_1 setTarget:appDelegate];
+        [textfield_1 setTarget:defaultController];
         [textfield_1 setAction:@selector(textfieldValueChanged:)];
         
         // add the slider to the window
@@ -179,15 +177,10 @@ int main(int argc, const char * argv[]) {
         
         int outline_x = 20;
         int outline_y = 270;
-        //int outline_y = 20;
         
         int outline_width = 400;
         int outline_height = 200;
         
-        /**/
-        
-        
-        //NSOutlineView *outline_1 = [[NSOutlineView alloc] initWithFrame: NSMakeRect(outline_x, outline_y, outline_width, outline_height)];
         NSOutlineView* outline_1 = [[NSOutlineView alloc] init];
         [outline_1 setIdentifier: @"outline_1"];
         
@@ -199,15 +192,20 @@ int main(int argc, const char * argv[]) {
         outline_1.layer.backgroundColor = [NSColor secondarySelectedControlColor].CGColor;
         
         [outline_1 setDataSource: outlineDataSource];
-        [outline_1 setDelegate: outlineDataSource];
-        //[outline_1 setDataSource: appDelegate];
-        //[outline_1 setDelegate: appDelegate];
-        //[outline_1 setBounds: NSMakeRect(outline_x, outline_y, outline_width, outline_height)];
+        
+        //
+        // Put a controller into the outline view. This step is optional and there
+        // are different implementations to choose from. Try leaving the controller
+        // away entirely and also try the different implementations
+        //
+        // this controller set into the outline view causes default outline view looks
+        //[outline_1 setDelegate: defaultController];
+        //
+        // custom implementation for callback functions and an edit field as cell item
+        [outline_1 setDelegate: customOutlineViewController];
         
         // https://stackoverflow.com/questions/22149164/nsoutlineview-source-list-without-a-nib
-        NSTableColumn *c = [[NSTableColumn alloc] initWithIdentifier: @"children"];
-        //NSTableCellView *c = [[NSTableCellView alloc] initWithIdentifier: @"children"];
-        [c setEditable: NO];
+        NSTableColumn *c = [[NSTableColumn alloc] initWithIdentifier: @"children"];        [c setEditable: NO];
         [c setMinWidth: 150.0];
         c.headerCell.stringValue = @"children";
         [outline_1 addTableColumn: c];
@@ -217,24 +215,8 @@ int main(int argc, const char * argv[]) {
         [p setEditable: NO];
         [p setMinWidth: 150.f];
         p.headerCell.stringValue = @"parent";
-        //p.dataCell = NSCell.
         [outline_1 addTableColumn: p];
         [outline_1 setOutlineTableColumn: p];
-        
-//        NSTableColumn* col1 = [[NSTableColumn alloc] initWithIdentifier:@"col1"];
-//        col1.editable = NO;
-//        col1.minWidth = 150.f;
-//        col1.headerCell.stringValue = [NSString stringWithFormat:@"DUT%lu", 1];
-//        [outline_1 addTableColumn: col1];
-//        [outline_1 setOutlineTableColumn: col1];
-        
-//        [outline_1 display];
-//        [outline_1 reloadData];
-        
-        //[appDelegate setOutlineView: outline_1];
-        
-        // add the outline to the window
-        //[[window contentView] addSubview: outline_1];
         
         NSClipView* clipview = [[NSClipView alloc] init];
         clipview.autoresizesSubviews = YES;
@@ -249,43 +231,6 @@ int main(int argc, const char * argv[]) {
         container.contentView = clipview;
         
         [[window contentView] addSubview: container];
-        
-//        [outline_1 display];
-//        [outline_1 reloadData];
-         
-        /*
-        // https://gist.github.com/adison/41bcfe6d8608505844ed109bfb1d08f7
-        NSScrollView* container = [[NSScrollView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
-        container.hasVerticalScroller = YES;
-        container.hasHorizontalScroller = YES;
-        container.wantsLayer = YES;
-        container.identifier = @"test";
-        
-        NSClipView* clipview = [[NSClipView alloc] init];
-        clipview.autoresizesSubviews = YES;
-        clipview.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-        
-        NSOutlineView* outline = [[NSOutlineView alloc] init];
-        outline.selectionHighlightStyle = NSTableViewSelectionHighlightStyleSourceList;
-        outline.floatsGroupRows = NO;
-        outline.indentationPerLevel = 16.f;
-        outline.indentationMarkerFollowsCell = NO;
-        outline.wantsLayer = YES;
-        outline.layer.backgroundColor = [NSColor secondarySelectedControlColor].CGColor;
-        
-        // outline code
-        NSTableColumn* col1 = [[NSTableColumn alloc] initWithIdentifier:@"col1"];
-        col1.editable = NO;
-        col1.minWidth = 300000.f;
-        col1.headerCell.stringValue = [NSString stringWithFormat:@"DUT%lu", 1];
-        [outline addTableColumn:col1];
-        [outline setOutlineTableColumn:col1];
-        
-        container.contentView = clipview;
-        clipview.documentView = outline;
-        
-        [[window contentView] addSubview: container];
-         */
         
         //
         // TODO
@@ -305,7 +250,6 @@ int main(int argc, const char * argv[]) {
         
         [NSApp activateIgnoringOtherApps:YES];
         
-        //[NSApp setDelegate: appDelegate];
         [NSApp run];
     }
     return 0;

@@ -14,6 +14,7 @@
 		906350F72A31D99800915C6F /* DefaultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 906350F32A31D99800915C6F /* DefaultController.m */; };
 		906350F82A31D99800915C6F /* DefaultNSOutlineViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 906350F42A31D99800915C6F /* DefaultNSOutlineViewDataSource.m */; };
 		906350F92A31D99800915C6F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 906350F52A31D99800915C6F /* ViewController.m */; };
+		906350FC2A31F03600915C6F /* CustomOutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 906350FB2A31F03600915C6F /* CustomOutlineViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		906350F42A31D99800915C6F /* DefaultNSOutlineViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultNSOutlineViewDataSource.m; sourceTree = "<group>"; };
 		906350F52A31D99800915C6F /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		906350F62A31D99800915C6F /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		906350FA2A31F03600915C6F /* CustomOutlineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomOutlineViewController.h; sourceTree = "<group>"; };
+		906350FB2A31F03600915C6F /* CustomOutlineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomOutlineViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +67,8 @@
 			children = (
 				906350F12A31D99800915C6F /* DefaultController.h */,
 				906350F32A31D99800915C6F /* DefaultController.m */,
+				906350FA2A31F03600915C6F /* CustomOutlineViewController.h */,
+				906350FB2A31F03600915C6F /* CustomOutlineViewController.m */,
 				906350F22A31D99800915C6F /* DefaultNSOutlineViewDataSource.h */,
 				906350F42A31D99800915C6F /* DefaultNSOutlineViewDataSource.m */,
 				906350F62A31D99800915C6F /* ViewController.h */,
@@ -149,6 +154,7 @@
 			files = (
 				906350F72A31D99800915C6F /* DefaultController.m in Sources */,
 				906350EA2A31D94800915C6F /* main.m in Sources */,
+				906350FC2A31F03600915C6F /* CustomOutlineViewController.m in Sources */,
 				906350F82A31D99800915C6F /* DefaultNSOutlineViewDataSource.m in Sources */,
 				906350E32A31D94700915C6F /* AppDelegate.m in Sources */,
 				906350F92A31D99800915C6F /* ViewController.m in Sources */,

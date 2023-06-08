@@ -110,7 +110,6 @@
     [self.myOutlineView reloadData];
 }
 
-
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
     
@@ -130,7 +129,6 @@
 // return the # of children, or rows for root.
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
-    
     if (item == nil) { //item is nil when the outline view wants to inquire for root level items
         return [self.myDataSource count];
     }
@@ -141,7 +139,6 @@
 // for each item return the object...if it's a child, then get the child object from NSDictionary and return that
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
-    
     if (item == nil) { //item is nil when the outline view wants to inquire for root level items
         return [self.myDataSource objectAtIndex:index];
     }
@@ -158,6 +155,12 @@
         cellView.textField.stringValue = item;
     }
     return cellView;
+    
+//        NSTextField *textField = [[NSTextField alloc] init];
+//        [textField setStringValue: @"Test"];
+//
+//        return textField;
+
 }
 
 #pragma mark Drag & Drop
