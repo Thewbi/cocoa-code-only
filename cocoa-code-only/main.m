@@ -241,12 +241,108 @@ int main(int argc, const char * argv[]) {
         [[window contentView] addSubview: container];
         
         //
+        // radio buttons
+        //
+        
+        // Radio Button group 2
+        
+        // https://developer.apple.com/documentation/appkit/nsmatrix?language=objc
+        // https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Button/Concepts/RadioButtons.html#//apple%5Fref/doc/uid/20000252
+        
+        // a view defines the scope that combines radio buttons into a radio button group
+        // RadioButtons share state amongst only one radio button group
+        // If you want several group of radio buttons, each group needs their own view
+        NSView *radioButtonGroup_1 = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 400, 400)];
+        
+        int button_2_x = 20;
+        int button_2_y = 130;
+        
+        int button_2_width = 130;
+        int button_2_height = 25;
+        
+        NSButton *button_2 = [[NSButton alloc] initWithFrame:NSMakeRect(button_2_x, button_2_y, button_2_width, button_2_height)];
+        NSButton *button_3 = [[NSButton alloc] initWithFrame:NSMakeRect(button_2_x, button_2_y, button_2_width, button_2_height + 40)];
+        NSButton *button_4 = [[NSButton alloc] initWithFrame:NSMakeRect(button_2_x, button_2_y, button_2_width, button_2_height + 80)];
+        
+        [button_2 setTitle: @"button_2"];
+        [button_2 setIdentifier: @"button_2"];
+        [button_2 setButtonType:NSButtonTypeRadio];
+        
+        [button_3 setTitle: @"button_3"];
+        [button_3 setIdentifier: @"button_3"];
+        [button_3 setButtonType:NSButtonTypeRadio];
+        
+        [button_4 setTitle: @"button_4"];
+        [button_4 setIdentifier: @"button_4"];
+        [button_4 setButtonType:NSButtonTypeRadio];
+        
+        // event handling
+        [button_2 setTarget:defaultController];
+        [button_2 setAction:@selector(buttonPressed:)];
+        [button_3 setTarget:defaultController];
+        [button_3 setAction:@selector(buttonPressed:)];
+        [button_4 setTarget:defaultController];
+        [button_4 setAction:@selector(buttonPressed:)];
+        
+        // add the buttons to the radioButtonGroup
+        [radioButtonGroup_1 addSubview: button_2];
+        [radioButtonGroup_1 addSubview: button_3];
+        [radioButtonGroup_1 addSubview: button_4];
+        
+        // add the radioButtonGroup to the window
+        [[window contentView] addSubview: radioButtonGroup_1];
+        
+        // Radio Button group 2
+        
+        // a view defines the scope that combines radio buttons into a radio button group
+        // RadioButtons share state amongst only one radio button group
+        // If you want several group of radio buttons, each group needs their own view
+        NSView *radioButtonGroup_2 = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 400, 400)];
+        
+        int button_5_x = 150;
+        int button_5_y = 130;
+        
+        int button_5_width = 130;
+        int button_5_height = 25;
+        
+        NSButton *button_5 = [[NSButton alloc] initWithFrame:NSMakeRect(button_5_x, button_5_y, button_5_width, button_5_height)];
+        NSButton *button_6 = [[NSButton alloc] initWithFrame:NSMakeRect(button_5_x, button_5_y, button_5_width, button_5_height + 40)];
+        NSButton *button_7 = [[NSButton alloc] initWithFrame:NSMakeRect(button_5_x, button_5_y, button_5_width, button_5_height + 80)];
+        
+        [button_5 setTitle: @"button_5"];
+        [button_5 setIdentifier: @"button_5"];
+        [button_5 setButtonType:NSButtonTypeRadio];
+        
+        [button_6 setTitle: @"button_6"];
+        [button_6 setIdentifier: @"button_6"];
+        [button_6 setButtonType:NSButtonTypeRadio];
+        
+        [button_7 setTitle: @"button_7"];
+        [button_7 setIdentifier: @"button_7"];
+        [button_7 setButtonType:NSButtonTypeRadio];
+        
+        // event handling
+        [button_5 setTarget:defaultController];
+        [button_5 setAction:@selector(buttonPressed:)];
+        [button_6 setTarget:defaultController];
+        [button_6 setAction:@selector(buttonPressed:)];
+        [button_7 setTarget:defaultController];
+        [button_7 setAction:@selector(buttonPressed:)];
+        
+        // add the buttons to the radioButtonGroup
+        [radioButtonGroup_2 addSubview: button_5];
+        [radioButtonGroup_2 addSubview: button_6];
+        [radioButtonGroup_2 addSubview: button_7];
+        
+        // add the radioButtonGroup to the window
+        [[window contentView] addSubview: radioButtonGroup_2];
+        
+        //
         // TODO
         //
         
-        // radio buttons
         // check boxes
-        // combo box
+        // combo box / drop down
         // item list
         // tree
         // table
