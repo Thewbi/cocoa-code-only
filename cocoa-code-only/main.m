@@ -338,10 +338,31 @@ int main(int argc, const char * argv[]) {
         [[window contentView] addSubview: radioButtonGroup_2];
         
         //
+        // check boxes
+        //
+        
+        int button_8_x = 20;
+        int button_8_y = 200;
+        
+        int button_8_width = 130;
+        int button_8_height = 25;
+        
+        NSButton *button_8 = [[NSButton alloc] initWithFrame:NSMakeRect(button_8_x, button_8_y, button_8_width, button_8_height)];
+        [button_8 setTitle: @"button_8"];
+        [button_8 setIdentifier: @"button_8"];
+        [button_8 setButtonType:NSButtonTypeSwitch];
+        
+        // event handling
+        [button_8 setTarget:defaultController];
+        [button_8 setAction:@selector(buttonPressed:)];
+        
+        // add the button to the window
+        [[window contentView] addSubview: button_8];
+        
+        //
         // TODO
         //
         
-        // check boxes
         // combo box / drop down
         // item list
         // tree
