@@ -20,8 +20,8 @@
 
 
 // https://stackoverflow.com/questions/6664898/nsoutlineview-example/9387255#9387255
-NSDictionary *firstParent = @{@"parent": @"Foo", @"children": @[@"Foox", @"Fooz"]};
-NSDictionary *secondParent = @{@"parent": @"Bar", @"children": @[@"Barx", @"Barz"]};
+//NSDictionary *firstParent = @{@"parent": @"Foo", @"children": @[@"Foox", @"Fooz"]};
+//NSDictionary *secondParent = @{@"parent": @"Bar", @"children": @[@"Barx", @"Barz"]};
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
@@ -138,7 +138,7 @@ NSDictionary *secondParent = @{@"parent": @"Bar", @"children": @[@"Barx", @"Barz
         
         //NSArray *list = @[firstParent, secondParent];
         
-        list = @[firstParent, secondParent];
+        //list = @[firstParent, secondParent];
         
         //[self setDataSource:self];
         //[self setDelegate:self];
@@ -146,178 +146,178 @@ NSDictionary *secondParent = @{@"parent": @"Bar", @"children": @[@"Barx", @"Barz
     return self;
 }
 
-//- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item {
-//    return false;
-//}
-
-- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
-    
-    NSLog(@"[AppDelegate] child() ofItem()");
-    
-    //    if (item) {
-    ////        if ([item isKindOfClass:CMTopLevelCategory.class]) {
-    ////            CMTopLevelCategory *topLevelCategory = item;
-    ////            return [topLevelCategory.examples objectAtIndex:index];
-    ////        }
-    //        return nil;
-    //    } else {
-    //        //return [self.topLevelCategories objectAtIndex:index];
-    //        return nil;
-    //    }
-    //    return nil;
-    
-    if (item == nil) {
-        // item is nil when the outline view wants to inquire for root level items
-        return [list objectAtIndex:index];
-    }
-    
-    if ([item isKindOfClass:[NSDictionary class]]) {
-        return [[item objectForKey:@"children"] objectAtIndex:index];
-    }
-    
-    return nil;
-}
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
-    NSLog(@"[AppDelegate] isItemExpandable()");
-    //return [item isKindOfClass:CMTopLevelCategory.class];
-    //return false;
-    
-    if ([item isKindOfClass:[NSDictionary class]]) {
-        return YES;
-    } else {
-        return NO;
-    }
-    
-   // return true;
-}
-
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
-    NSLog(@"[AppDelegate] numberOfChildrenOfItem()");
-    //    if (item) {
-    //        if ([item isKindOfClass:CMTopLevelCategory.class]) {
-    //            CMTopLevelCategory *topLevelCategory = item;
-    //            return [topLevelCategory.examples count];
-    //        }
-    //    } else {
-    //        return [self.topLevelCategories count];
-    //    }
-    
-    
-    
-    if (item) {
-        
-        
-        
-        if ([item isKindOfClass:[NSDictionary class]]) {
-            
-            NSInteger number = [[item objectForKey:@"children"] count];
-            NSLog(@"[AppDelegate] numberOfChildrenOfItem() mid level items requested! amount: %li", number);
-            
-            return number;
-        }
-        
-    } else {
-        NSInteger number = [list count];
-        
-        // https://stackoverflow.com/questions/6664898/nsoutlineview-example/9387255#9387255
-        // item is nil when the outline view wants to inquire for root level items
-        NSLog(@"[AppDelegate] numberOfChildrenOfItem() root level items requested! amount: %li", (long)number);
-        
-        
-        return number;
-    }
-    
-    return 0;
-}
-
-- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-    
-    NSLog(@"[AppDelegate] byItem() - column identifier: %@", tableColumn.identifier);
-    //    if ([item isKindOfClass:CMTopLevelCategory.class]) {
-    //        CMTopLevelCategory *topLevelCategory = item;
-    //        if ([tableColumn.identifier isEqualToString:CMNameColumnIdentifier]) {
-    //            return topLevelCategory.name;
-    //        } else if ([tableColumn.identifier isEqualToString:CMCountColumnIdentifier]) {
-    //            return [NSNumber numberWithUnsignedInteger:[topLevelCategory.examples count]];
-    //        }
-    //    } else if ([item isKindOfClass:CMExample.class]) {
-    //        CMExample *example = item;
-    //        if ([tableColumn.identifier isEqualToString:CMNameColumnIdentifier]) {
-    //            return example.name;
-    //        }
-    //    }
-    
-    //return @"default value";
-    
-    if ([[tableColumn identifier] isEqualToString:@"children"]) {
-        
-        if ([item isKindOfClass:[NSDictionary class]]) {
-            
-            NSString *value = [NSString stringWithFormat:@"%lu", (unsigned long)[[item objectForKey:@"children"] count]];
-            
-            NSLog(@"[AppDelegate] - value: %@", value);
-            
-            return value;
-        }
-        
-        return @"0";
-        
-    } else if ([[tableColumn identifier] isEqualToString:@"parent"]) {
-        
-        if ([item isKindOfClass:[NSDictionary class]]) {
-            
-            id value = [item objectForKey:@"parent"];
-            
-            NSLog(@"[AppDelegate] - value: %@", value);
-            
-            return value;
-        }
-    }
-    
-    //return @"default value";
-    return item;
-}
-
-
-
-//- (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item
-//{
-//    return YES;
+////- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item {
+////    return false;
+////}
+//
+//- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
+//    
+//    NSLog(@"[AppDelegate] child() ofItem()");
+//    
+//    //    if (item) {
+//    ////        if ([item isKindOfClass:CMTopLevelCategory.class]) {
+//    ////            CMTopLevelCategory *topLevelCategory = item;
+//    ////            return [topLevelCategory.examples objectAtIndex:index];
+//    ////        }
+//    //        return nil;
+//    //    } else {
+//    //        //return [self.topLevelCategories objectAtIndex:index];
+//    //        return nil;
+//    //    }
+//    //    return nil;
+//    
+//    if (item == nil) {
+//        // item is nil when the outline view wants to inquire for root level items
+//        return [list objectAtIndex:index];
+//    }
+//    
+//    if ([item isKindOfClass:[NSDictionary class]]) {
+//        return [[item objectForKey:@"children"] objectAtIndex:index];
+//    }
+//    
+//    return nil;
 //}
 //
-//- (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item
-//{
-//    return NO;
+//- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
+//    NSLog(@"[AppDelegate] isItemExpandable()");
+//    //return [item isKindOfClass:CMTopLevelCategory.class];
+//    //return false;
+//    
+//    if ([item isKindOfClass:[NSDictionary class]]) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+//    
+//   // return true;
 //}
 //
-//- (void)dealloc
-//{
-//    NSLog(@"deallocating %@", self);
+//- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
+//    NSLog(@"[AppDelegate] numberOfChildrenOfItem()");
+//    //    if (item) {
+//    //        if ([item isKindOfClass:CMTopLevelCategory.class]) {
+//    //            CMTopLevelCategory *topLevelCategory = item;
+//    //            return [topLevelCategory.examples count];
+//    //        }
+//    //    } else {
+//    //        return [self.topLevelCategories count];
+//    //    }
+//    
+//    
+//    
+//    if (item) {
+//        
+//        
+//        
+//        if ([item isKindOfClass:[NSDictionary class]]) {
+//            
+//            NSInteger number = [[item objectForKey:@"children"] count];
+//            NSLog(@"[AppDelegate] numberOfChildrenOfItem() mid level items requested! amount: %li", number);
+//            
+//            return number;
+//        }
+//        
+//    } else {
+//        NSInteger number = [list count];
+//        
+//        // https://stackoverflow.com/questions/6664898/nsoutlineview-example/9387255#9387255
+//        // item is nil when the outline view wants to inquire for root level items
+//        NSLog(@"[AppDelegate] numberOfChildrenOfItem() root level items requested! amount: %li", (long)number);
+//        
+//        
+//        return number;
+//    }
+//    
+//    return 0;
 //}
-
-
-
-
-/* View Based OutlineView: See the delegate method -tableView:viewForTableColumn:row: in NSTableView.
- */
-- (nullable NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(nullable NSTableColumn *)tableColumn item:(id)item API_AVAILABLE(macos(10.7)) {
-    //NSLog(@"[DefaultNSOutlineViewDataSource] viewForTableColumn()");
-    //return nil;
-    
-    NSLog(@"[AppDelegate] viewForTableColumn() column name: %@, width: %f", tableColumn.identifier, tableColumn.width);
-//    NSTableCellView *result = [[NSTableCellView alloc] init];
+//
+//- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
+//    
+//    NSLog(@"[AppDelegate] byItem() - column identifier: %@", tableColumn.identifier);
+//    //    if ([item isKindOfClass:CMTopLevelCategory.class]) {
+//    //        CMTopLevelCategory *topLevelCategory = item;
+//    //        if ([tableColumn.identifier isEqualToString:CMNameColumnIdentifier]) {
+//    //            return topLevelCategory.name;
+//    //        } else if ([tableColumn.identifier isEqualToString:CMCountColumnIdentifier]) {
+//    //            return [NSNumber numberWithUnsignedInteger:[topLevelCategory.examples count]];
+//    //        }
+//    //    } else if ([item isKindOfClass:CMExample.class]) {
+//    //        CMExample *example = item;
+//    //        if ([tableColumn.identifier isEqualToString:CMNameColumnIdentifier]) {
+//    //            return example.name;
+//    //        }
+//    //    }
+//    
+//    //return @"default value";
+//    
+//    if ([[tableColumn identifier] isEqualToString:@"children"]) {
+//        
+//        if ([item isKindOfClass:[NSDictionary class]]) {
+//            
+//            NSString *value = [NSString stringWithFormat:@"%lu", (unsigned long)[[item objectForKey:@"children"] count]];
+//            
+//            NSLog(@"[AppDelegate] - value: %@", value);
+//            
+//            return value;
+//        }
+//        
+//        return @"0";
+//        
+//    } else if ([[tableColumn identifier] isEqualToString:@"parent"]) {
+//        
+//        if ([item isKindOfClass:[NSDictionary class]]) {
+//            
+//            id value = [item objectForKey:@"parent"];
+//            
+//            NSLog(@"[AppDelegate] - value: %@", value);
+//            
+//            return value;
+//        }
+//    }
+//    
+//    //return @"default value";
+//    return item;
+//}
+//
+//
+//
+////- (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item
+////{
+////    return YES;
+////}
+////
+////- (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item
+////{
+////    return NO;
+////}
+////
+////- (void)dealloc
+////{
+////    NSLog(@"deallocating %@", self);
+////}
+//
+//
+//
+//
+///* View Based OutlineView: See the delegate method -tableView:viewForTableColumn:row: in NSTableView.
+// */
+//- (nullable NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(nullable NSTableColumn *)tableColumn item:(id)item API_AVAILABLE(macos(10.7)) {
+//    //NSLog(@"[DefaultNSOutlineViewDataSource] viewForTableColumn()");
+//    //return nil;
+//    
+//    NSLog(@"[AppDelegate] viewForTableColumn() column name: %@, width: %f", tableColumn.identifier, tableColumn.width);
+////    NSTableCellView *result = [[NSTableCellView alloc] init];
+////    NSTextField *textField = [[NSTextField alloc] init];
+////    [textField setStringValue:@"Test"];
+////    [result addSubview:textField];
+////
+////    return result;
+//    
 //    NSTextField *textField = [[NSTextField alloc] init];
-//    [textField setStringValue:@"Test"];
-//    [result addSubview:textField];
-//
-//    return result;
-    
-    NSTextField *textField = [[NSTextField alloc] init];
-    [textField setStringValue: @"Test"];
-    
-    return textField;
-}
+//    [textField setStringValue: @"Test"];
+//    
+//    return textField;
+//}
 
 ///* View Based OutlineView: See the delegate method -tableView:rowViewForRow: in NSTableView.
 // */
@@ -339,9 +339,9 @@ NSDictionary *secondParent = @{@"parent": @"Bar", @"children": @[@"Barx", @"Barz
 //    NSLog(@"[DefaultNSOutlineViewDataSource] didRemoveRowView()");
 //}
 //
-- (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(nullable NSTableColumn *)tableColumn item:(id)item {
-    NSLog(@"[AppDelegate] willDisplayCell()");
-}
+//- (void)outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(nullable NSTableColumn *)tableColumn item:(id)item {
+//    NSLog(@"[AppDelegate] willDisplayCell()");
+//}
 //
 //- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(nullable NSTableColumn *)tableColumn item:(id)item {
 //    NSLog(@"[DefaultNSOutlineViewDataSource] shouldEditTableColumn()");

@@ -8,9 +8,9 @@
 //#import <UIKit/UIKit.h>
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
-//#import "DefaultController.h"
-//#import "DefaultNSOutlineViewDataSource.h"
-#import "ViewController.h"
+#import "DefaultController.h"
+#import "DefaultNSOutlineViewDataSource.h"
+//#import "ViewController.h"
 
 #import "AppDelegate.h"
 
@@ -35,6 +35,9 @@ int main(int argc, const char * argv[])
 int main(int argc, const char * argv[]) {
     
     NSLog(@"main() ...");
+    
+//todo: everything was moved from the controller into the delegate
+  //  separate those classes again
     
     @autoreleasepool {
         
@@ -68,7 +71,7 @@ int main(int argc, const char * argv[]) {
         // ViewController
         //
         
-        id viewController = [[ViewController alloc] init];
+        //id viewController = [[ViewController alloc] init];
         
         //
         // Main Window
@@ -88,7 +91,7 @@ int main(int argc, const char * argv[]) {
         // custom UI controll (callback handler for widget events)
         //
         
-        //id controller = [DefaultController alloc];
+        id controller = [DefaultController alloc];
  
         //
         // Button
@@ -111,8 +114,8 @@ int main(int argc, const char * argv[]) {
         [button_1 setBezelStyle:NSBezelStyleRounded];
         
         // event handling
-        //[button_1 setTarget:controller];
-        [button_1 setTarget:appDelegate];
+        [button_1 setTarget:controller];
+        //[button_1 setTarget:appDelegate];
         [button_1 setAction:@selector(buttonPressed:)];
         
         // add the button to the window
@@ -133,8 +136,8 @@ int main(int argc, const char * argv[]) {
         [slider_1 setIdentifier: @"slider_1"];
         
         // event handling
-        //[slider_1 setTarget:controller];
-        [slider_1 setTarget:appDelegate];
+        [slider_1 setTarget:controller];
+        //[slider_1 setTarget:appDelegate];
         [slider_1 setContinuous:YES];
         [slider_1 setAction:@selector(sliderValueChanged:)];
         
@@ -158,8 +161,8 @@ int main(int argc, const char * argv[]) {
         [textfield_1 setIdentifier: @"textfield_1"];
         
         // event handling
-        //[textfield_1 setTarget:controller];
-        [textfield_1 setTarget:appDelegate];
+        [textfield_1 setTarget:controller];
+        //[textfield_1 setTarget:appDelegate];
         [textfield_1 setAction:@selector(textfieldValueChanged:)];
         
         // add the slider to the window
@@ -172,7 +175,7 @@ int main(int argc, const char * argv[]) {
         // https://stackoverflow.com/questions/19464136/view-based-nsoutlineview-without-nib
         //
         
-//        id outlineDataSource = [[DefaultNSOutlineViewDataSource alloc] init];
+        id outlineDataSource = [[DefaultNSOutlineViewDataSource alloc] init];
         
         int outline_x = 20;
         int outline_y = 270;
@@ -195,10 +198,10 @@ int main(int argc, const char * argv[]) {
         outline_1.wantsLayer = YES;
         outline_1.layer.backgroundColor = [NSColor secondarySelectedControlColor].CGColor;
         
-        //[outline_1 setDataSource: outlineDataSource];
-        //[outline_1 setDelegate: outlineDataSource];
-        [outline_1 setDataSource: appDelegate];
-        [outline_1 setDelegate: appDelegate];
+        [outline_1 setDataSource: outlineDataSource];
+        [outline_1 setDelegate: outlineDataSource];
+        //[outline_1 setDataSource: appDelegate];
+        //[outline_1 setDelegate: appDelegate];
         //[outline_1 setBounds: NSMakeRect(outline_x, outline_y, outline_width, outline_height)];
         
         // https://stackoverflow.com/questions/22149164/nsoutlineview-source-list-without-a-nib
