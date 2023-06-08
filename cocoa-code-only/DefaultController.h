@@ -12,12 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DefaultController : NSObject
 
--(void)buttonPressed:(NSButton *)sender;
+- (void)menuItemCallback:(id)sender;
 
--(void)sliderValueChanged:(NSSlider *)sender;
+- (void)buttonPressed:(NSButton *)sender;
+
+- (void)sliderValueChanged:(NSSlider *)sender;
 
 // Press Enter in the textfield to trigger this handler
--(void)textfieldValueChanged:(NSTextField *)sender;
+- (void)textfieldValueChanged:(NSTextField *)sender;
 
 @end
 

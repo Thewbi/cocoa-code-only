@@ -9,7 +9,11 @@
 
 @implementation DefaultController
 
--(void)buttonPressed:(NSButton *)sender {
+- (void)menuItemCallback:(id)sender {
+    NSLog(@"[DefaultController] menuItemCallback()! sender: '%@'", sender);
+}
+
+- (void)buttonPressed:(NSButton *)sender {
     NSLog(@"[DefaultController] Button pressed! Button: '%@'", sender.identifier);
     
     // For Strings you use %@

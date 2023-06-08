@@ -13,8 +13,8 @@
 @implementation DefaultNSOutlineViewDataSource
 
     // https://stackoverflow.com/questions/6664898/nsoutlineview-example/9387255#9387255
-    NSDictionary *firstParent = @{@"parent": @"Foo", @"children": @[@"Foox", @"Fooz"]};
-    NSDictionary *secondParent = @{@"parent": @"Bar", @"children": @[@"Barx", @"Barz"]};
+    NSDictionary *firstParent = @{@"parent": @"Foo", @"children": @[@"Foox", @"Fooz", @"Fooz", @"Fooz", @"Fooz", @"Fooz", @"Fooz"]};
+    NSDictionary *secondParent = @{@"parent": @"Bar", @"children": @[@"Barx", @"Barz", @"Barz", @"Barz", @"Barz", @"Barz", @"Barz", @"Barz"]};
 
 - (id)init {
     NSLog(@"[DefaultNSOutlineViewDataSource] init()");

@@ -47,14 +47,27 @@ int main(int argc, const char * argv[]) {
         id appName = [[NSProcessInfo processInfo] processName];
         
         //
+        // custom UI controll (callback handler for widget events)
+        //
+        
+        id defaultController = [DefaultController alloc];
+        id customOutlineViewController = [CustomOutlineViewController alloc];
+        
+        //
         // MenuBar
         //
         
+        id menuItem1Title = @"Menu Item 1";
+        id menuItem1MenuItem = [[NSMenuItem alloc] initWithTitle:menuItem1Title
+                                                     action:@selector(menuItemCallback:) keyEquivalent:@"q"];
+        [menuItem1MenuItem setTarget:defaultController];
+        
         id quitTitle = [@"Quit " stringByAppendingString:appName];
         id quitMenuItem = [[NSMenuItem alloc] initWithTitle:quitTitle
-                                                     action:@selector(terminate:) keyEquivalent:@"q"];
+            action:@selector(terminate:) keyEquivalent:@"q"];
         
         id appMenu = [NSMenu new];
+        [appMenu addItem:menuItem1MenuItem];
         [appMenu addItem:quitMenuItem];
         
         id appMenuItem = [NSMenuItem new];
@@ -87,12 +100,7 @@ int main(int argc, const char * argv[]) {
         
         [appDelegate setWindow: window];
         
-        //
-        // custom UI controll (callback handler for widget events)
-        //
         
-        id defaultController = [DefaultController alloc];
-        id customOutlineViewController = [CustomOutlineViewController alloc];
  
         //
         // Button
@@ -236,7 +244,6 @@ int main(int argc, const char * argv[]) {
         // TODO
         //
         
-        // menu bar
         // radio buttons
         // check boxes
         // combo box
