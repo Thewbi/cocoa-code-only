@@ -10,7 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DefaultController : NSObject
+@interface DefaultController : NSObject {
+ 
+    @public long editValue;
+    
+    // https://stackoverflow.com/questions/1643007/iboutlet-and-ibaction
+    /*IBOutlet*/ //NSStepper * stepper;
+    /*IBOutlet*/ //@public NSTextField * textField;
+    
+}
+
+@property (assign) long editValue;
+@property (nonatomic, weak) NSTextField *textField;
+@property (nonatomic, weak) NSStepper *stepper;
 
 - (void)menuItemCallback:(id)sender;
 
@@ -20,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Press Enter in the textfield to trigger this handler
 - (void)textfieldValueChanged:(NSTextField *)sender;
+
+- (void)comboBoxSelectionDidChange:(NSNotification *)notification;
 
 @end
 

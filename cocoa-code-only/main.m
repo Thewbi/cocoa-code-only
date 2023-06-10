@@ -376,13 +376,15 @@ int main(int argc, const char * argv[]) {
         [popUpButton setTitle: @"button_9"];
         [popUpButton setIdentifier: @"button_9"];
         
-        // Unlike popup lists, the title of a popup button displaying a pulldown list is not based on the currently selected item and thus remains fixed unless you change using the cell’s setTitle:method.
+        // Unlike popup lists, the title of a popup button displaying a pulldown
+        // list is not based on the currently selected item and thus remains fixed
+        // unless you change using the cell’s setTitle:method.
         popUpButton.pullsDown = true;
         //popUpButton.pullsDown = false;
         
-        NSArray *theTitleArray = [NSArray arrayWithObjects:@"Item 1", @"Item 2", @"Item 3", @"Item 4", nil];
+        NSArray *popUpButtonItems = [NSArray arrayWithObjects:@"Item 1", @"Item 2", @"Item 3", @"Item 4", nil];
         [popUpButton removeAllItems];
-        [popUpButton addItemsWithTitles:theTitleArray];
+        [popUpButton addItemsWithTitles:popUpButtonItems];
         
         // event handling
         [popUpButton setTarget:defaultController];
@@ -390,6 +392,116 @@ int main(int argc, const char * argv[]) {
         
         // add the button to the window
         [[window contentView] addSubview: popUpButton];
+        
+        //
+        // up/down spin input text field
+        //
+        
+        // https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MenuList/Articles/ManagingPopUpItems.html
+        // https://developer.apple.com/forums/thread/44190
+        
+        int button_11_x = 280;
+        int button_11_y = 230;
+        
+        int button_11_width = 130;
+        int button_11_height = 25;
+        
+        NSPopUpButton *popUpUpDownButton = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(button_11_x, button_11_y, button_11_width, button_11_height)];
+        [popUpUpDownButton setTitle: @"button_11"];
+        [popUpUpDownButton setIdentifier: @"button_11"];
+        
+        // Unlike popup lists, the title of a popup button displaying a pulldown
+        // list is not based on the currently selected item and thus remains fixed
+        // unless you change using the cell’s setTitle:method.
+        //popUpButton.pullsDown = true;
+        popUpUpDownButton.pullsDown = false;
+        
+        NSArray *popUpUpDownButtonItems = [NSArray arrayWithObjects:@"Item 1", @"Item 2", @"Item 3", @"Item 4", nil];
+        [popUpUpDownButton removeAllItems];
+        [popUpUpDownButton addItemsWithTitles:popUpUpDownButtonItems];
+        
+        // event handling
+        [popUpUpDownButton setTarget:defaultController];
+        [popUpUpDownButton setAction:@selector(buttonPressed:)];
+        
+        // add the button to the window
+        [[window contentView] addSubview: popUpUpDownButton];
+        
+        //
+        // UIStepper
+        //
+        
+        // https://stackoverflow.com/questions/702829/integrate-nsstepper-with-nstextfield
+        
+        int textfield_2_x = 420;
+        int textfield_2_y = 230;
+        
+        int textfield_2_width = 130;
+        int textfield_2_height = 25;
+        
+        NSTextField *textfield_2 = [[NSTextField alloc] initWithFrame:NSMakeRect(textfield_2_x, textfield_2_y, textfield_2_width, textfield_2_height)];
+        
+        [textfield_2 setIdentifier: @"textfield_2"];
+        
+        //[defaultController textField:[textfield_2]];
+        //[[defaultController textField] bind:textfield_2];
+        
+        //defaultController->textField = textfield_2;
+        [defaultController setTextField: textfield_2];
+        
+        [textfield_2 setTarget:defaultController];
+        [textfield_2 setAction:@selector(controlDidChange:)];
+        
+        // add the slider to the window
+        [[window contentView] addSubview: textfield_2];
+        
+        int button_12_x = 550;
+        int button_12_y = 230;
+        
+        int button_12_width = 20;
+        int button_12_height = 25;
+        
+        NSStepper *stepper = [[NSStepper alloc] initWithFrame:NSMakeRect(button_12_x, button_12_y, button_12_width, button_12_height)];
+        
+        [[window contentView] addSubview:stepper];
+        
+        [defaultController setStepper: stepper];
+        
+        [stepper setTarget:defaultController];
+        [stepper setAction:@selector(controlDidChange:)];
+        
+        [stepper setMinValue:0];
+        [stepper setMaxValue:9];
+        
+        //
+        // NSComboBox
+        //
+        
+        // https://developer.apple.com/documentation/appkit/nscombobox?language=objc
+        
+        int button_10_x = 150;
+        int button_10_y = 230;
+        
+        int button_10_width = 130;
+        int button_10_height = 25;
+        
+        NSComboBox *comboBox = [[NSComboBox alloc] initWithFrame:NSMakeRect(button_10_x, button_10_y, button_10_width, button_10_height)];
+        //[comboBox setTitle: @"button_10"];
+        [comboBox setIdentifier: @"button_10"];
+        
+        NSArray *comboBoxItems = [NSArray arrayWithObjects:@"Item 1", @"Item 2", @"Item 3", @"Item 4", nil];
+        comboBox.usesDataSource = false;
+        [comboBox addItemWithObjectValue: @"a"];
+        [comboBox addItemsWithObjectValues: comboBoxItems];
+        
+        // pre select item
+        [comboBox selectItemAtIndex:0];
+        
+        // event handling
+        comboBox.delegate = defaultController;
+        
+        // add the button to the window
+        [[window contentView] addSubview: comboBox];
         
         //
         // progress bar
@@ -446,7 +558,7 @@ int main(int argc, const char * argv[]) {
                 
                 // this is an anonymous function aka. block this executed by the timer each tick
                 
-                NSLog(@"progress_indicator_1_timer()");
+                //NSLog(@"progress_indicator_1_timer()");
                 //[progressIndicator incrementBy: 5];
                 
                 indicator_curr_val = indicator_curr_val + ( increment ? indicator_inc : (-1.0)*indicator_inc );

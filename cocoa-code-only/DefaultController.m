@@ -9,6 +9,28 @@
 
 @implementation DefaultController
 
+// https://stackoverflow.com/questions/702829/integrate-nsstepper-with-nstextfield
+- (IBAction) controlDidChange: (id) sender
+{
+    NSLog(@"[DefaultController] controlDidChange()");
+    
+    [self setEditValue:[sender integerValue]];
+    [self updateControls];
+}
+
+// https://stackoverflow.com/questions/702829/integrate-nsstepper-with-nstextfield
+- (void) updateControls
+{
+    NSLog(@"[DefaultController] updateControls()");
+    NSLog(@"[DefaultController] controlDidChange() editValue: %i", self->_editValue);
+    
+    self->_stepper.integerValue = self->_editValue;
+    self->_textField.integerValue = self->_editValue;
+}
+
+
+
+
 - (void)menuItemCallback:(id)sender {
     NSLog(@"[DefaultController] menuItemCallback()! sender: '%@'", sender);
 }
@@ -17,7 +39,7 @@
     NSLog(@"[DefaultController] Button pressed! Button: '%@'", sender.identifier);
     
     // For Strings you use %@
-    // For int  you use %i
+    // For int you use %i
     // For float you use %f
     // For double you use %lf
     
@@ -66,10 +88,22 @@
     }
 }
 
--(void)textfieldValueChanged:(NSTextField *)sender {
+- (void)textfieldValueChanged:(NSTextField *)sender {
     
     NSString* value = sender.stringValue;
     NSLog(@"[DefaultController] Textfield value changed! Slider: '%@' value: %@", sender.identifier, value);
+}
+
+- (void)comboBoxSelectionDidChange:(NSNotification *)notification {
+    NSComboBox *comboBox = (NSComboBox *)[notification object];
+    
+    //NSLog(@"[comboBox stringValue] : %@", [salaryBy stringValue] );
+    
+    NSString *strValue = [comboBox itemObjectValueAtIndex:[comboBox indexOfSelectedItem]];
+    
+    NSLog(@"[comboBox stringValue]: %@", strValue);
+    
+    
 }
 
 //- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
